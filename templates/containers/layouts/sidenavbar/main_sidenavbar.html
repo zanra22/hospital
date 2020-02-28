@@ -1,0 +1,55 @@
+{% load static %}
+
+<!-- Sidenav -->
+<nav
+  class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white"
+  id="sidenav-main"
+>
+  <div class="scrollbar-inner">
+    <!-- Brand -->
+    <div class="sidenav-header d-flex align-items-center">
+      <a class="navbar-brand" href="#">
+        <img
+          src="{% static 'img/brand/smarthealth102.png' %}"
+          class="navbar-brand-img"
+          alt="..."
+        />
+        SH 102
+      </a>
+      <div class="ml-auto">
+        <!-- Sidenav toggler -->
+        <div
+          class="sidenav-toggler d-none d-xl-block"
+          data-action="sidenav-unpin"
+          data-target="#sidenav-main"
+        >
+          <div class="sidenav-toggler-inner">
+            <i class="sidenav-toggler-line"></i>
+            <i class="sidenav-toggler-line"></i>
+            <i class="sidenav-toggler-line"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar-inner">
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <!-- Nav items -->
+        {% if request.user.is_superuser %}
+            {% include 'containers/layouts/sidenavbar/item_sidenavbar_admin.html' %}
+        {% elif request.user.userType == 'Client' %}
+            {% include 'containers/layouts/sidenavbar/item_sidenavbar_client.html' %}
+        {% elif request.user.userType == 'Doctor' %}
+            {% include 'containers/layouts/sidenavbar/item_sidenavbar_doctor.html' %}
+        {% elif request.user.userType == 'Nurse' %}
+            {% include 'containers/layouts/sidenavbar/item_sidenavbar_nurse.html' %}
+        {% endif %}
+
+        <!-- Divider -->
+        
+        <!-- Heading -->
+        
+      </div>
+    </div>
+  </div>
+</nav>
